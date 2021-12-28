@@ -1,0 +1,11 @@
+<h2>Watched List</h2>
+{% if watched_list %}
+    <ul>
+    {% for movie in watched_list %}
+        <li>{{ movie }}, <a href="/edit"> edit </a></li>
+    {% endfor %}
+    </ul>
+    <a href="/add">Add a movie</a>
+{% else %}
+    <h1>Watch a movie!</h1>
+{% endif %}
