@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import AddForm, EditForm
+from .models import Watched
 
 def home(request):
-    watched_list = ["Don't Look Up", "Encanto", "Spider-Man: No Way Home"]
-    return render(request, 'home.html', {'watched_list': watched_list})
+    queryset = Watched.objects.all()
+    context = {
+        "watched_list": queryset
+    }
+    return render(request, 'home.html', context)
 
 
 def add(request):
