@@ -10,7 +10,7 @@ class Movie(models.Model):
 
 class Watched(Movie):
     your_rating = models.DecimalField(max_digits=3, decimal_places=1)
-    review = models.TextField()
+    review = models.TextField(blank=True)
     date_first_watch = models.DateField()
     times_watched = models.IntegerField(blank=False)
 
