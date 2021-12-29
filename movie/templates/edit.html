@@ -1,4 +1,7 @@
-<form action="/title/" method="post">
+<img src="{{ img_src }}" width="200px">
+{{ movie }}, {{ movie.year }}
+
+<form action="/" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit">

@@ -1,0 +1,11 @@
+<img src="{{ img_src }}" width="200px">
+<h2>{{ movie.title }}, {{ movie.year }}</h2>
+<p>
+{% for people in movie.director %}
+    {{ people }}, 
+{% endfor %}    
+<br> <br>
+{% for people in movie.cast %}
+    {{ people.name }}, 
+{% endfor %}
+</p>

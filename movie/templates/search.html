@@ -1,0 +1,17 @@
+<form action="/search/" method="post">
+    {% csrf_token %}
+    {{ search_form }}
+    <input type="submit" value="Submit">
+</form>
+
+<div id="search-results">
+    {% if results %}
+        {% for movie in results.items %}
+            <a href="/add/{{ movie.0 }}">
+                <img src="{{movie.1.cover}}" width="50px"/> {{ movie.1.title }} ({{ movie.1.year }})
+            </a>
+        {% endfor %}
+    {% else %}
+        <h2>Search a movie!</h2>
+    {% endif %}
+</div>
