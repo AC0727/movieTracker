@@ -44,27 +44,36 @@ def search(request):
 
 
 def add(request, movie_id):
-    if request.method == 'POST':
-        form = AddForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            movie = Watched
-            form = AddForm()
-            return render(request, 'add.html', {
-                'form': form,
-                'results': movie.search(form.cleaned_data['search']),
-                'search_query': form.cleaned_data['search']
-            })
-
-    else:
-        movie = Watched().get_media(movie_id)
-        form = AddForm()
-
-        return render(request, 'add.html', {
-            'form': form,
-            'movie': movie,
-            'img_src': movie['full-size cover url']})
+    # if request.method == 'POST':
+    #     form = AddForm(request.POST)
+    #
+    #     if form.is_valid():
+    #         form.save()
+    #         movie = Watched()
+    #         return render(request, 'add.html', {
+    #             'form': form,
+    #             'results': movie.search(form.cleaned_data['search']),
+    #             'search_query': form.cleaned_data['search']
+    #         })
+    #
+    # else:
+    #     movie = Watched().get_media(movie_id)
+    #     form = AddForm()
+    #
+    #     return render(request, 'add.html', {
+    #         'form': form,
+    #         'movie': movie,
+    #         'img_src': movie['full-size cover url']})
+    movie = Movie().get_media(movie_id)
+    form = AddForm(request.POST or None, initial={
+        'title': movie,
+        'user_rating': float(movie.data['rating'])})
+    if form.is_valid():
+        form.save()
+    return render(request, 'add.html', {
+         'form': form,
+         'movie': movie,
+         'img_src': movie['full-size cover url']})
 
 
 def edit(request, movie_id):

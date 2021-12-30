@@ -8,6 +8,8 @@ class AddForm(forms.ModelForm):
     class Meta:
         model = Watched
         fields = [
+            'title',
+            'user_rating',
             'your_rating',
             'review',
             'date_first_watch',
@@ -18,6 +20,8 @@ class EditForm(forms.ModelForm):
     class Meta:
         model = Watched
         fields = [
+            'title',
+            'user_rating',
             'your_rating',
             'review',
             'date_first_watch',
