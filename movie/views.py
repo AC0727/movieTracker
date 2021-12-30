@@ -75,7 +75,7 @@ def edit(request, movie_id):
         movie = Movie().get_media(movie_id)
         form = EditForm()
 
-    return render(request, 'add.html', {
+    return render(request, 'edit.html', {
         'form': form,
         'movie': movie,
         'img_src': movie['full-size cover url']})
