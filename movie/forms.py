@@ -1,15 +1,26 @@
 from django import forms
+from .models import Movie, Watched
 
 class SearchForm(forms.Form):
     search = forms.CharField(label='Add a movie')
 
-class AddForm(forms.Form):
-    rating = forms.DecimalField(label='Rating')
-    date = forms.DateField(label='Date')
-    review = forms.CharField(label='Review')
+class AddForm(forms.ModelForm):
+    class Meta:
+        model = Watched
+        fields = [
+            'your_rating',
+            'review',
+            'date_first_watch',
+            'times_watched'
+        ]
 
-class EditForm(forms.Form):
-    rating = forms.DecimalField(label='Rating')
-    date = forms.DateField(label='Date')
-    review = forms.CharField(label='Review')
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Watched
+        fields = [
+            'your_rating',
+            'review',
+            'date_first_watch',
+            'times_watched'
+        ]
 

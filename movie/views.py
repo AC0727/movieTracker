@@ -48,7 +48,9 @@ def add(request, movie_id):
         form = AddForm(request.POST)
 
         if form.is_valid():
-            movie = Movie()
+            form.save()
+            movie = Watched
+            form = AddForm()
             return render(request, 'add.html', {
                 'form': form,
                 'results': movie.search(form.cleaned_data['search']),
@@ -56,27 +58,28 @@ def add(request, movie_id):
             })
 
     else:
-        movie = Movie().get_media(movie_id)
+        movie = Watched().get_media(movie_id)
         form = AddForm()
 
-    return render(request, 'add.html', {
-        'form': form,
-        'movie': movie,
-        'img_src': movie['full-size cover url']})
+        return render(request, 'add.html', {
+            'form': form,
+            'movie': movie,
+            'img_src': movie['full-size cover url']})
 
 
 def edit(request, movie_id):
     if request.method == 'POST':
         form = EditForm(request.POST)
         if form.is_valid():
+            form.save()
             return redirect('')
 
     else:
-        movie = Movie().get_media(movie_id)
+        movie = Watched().get_media(movie_id)
         form = EditForm()
 
-    return render(request, 'edit.html', {
-        'form': form,
-        'movie': movie,
-        'img_src': movie['full-size cover url']})
+        return render(request, 'edit.html', {
+            'form': form,
+            'movie': movie,
+            'img_src': movie['full-size cover url']})
 
