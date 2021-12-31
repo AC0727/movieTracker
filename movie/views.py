@@ -61,14 +61,7 @@ def add(request, movie_id):
 def edit(request, movie_id): #don't think I'll need edit.html
     obj = get_object_or_404(Watched, movie_id) #wrong movie id
     movie = Movie().get_media(movie_id)
-    form = AddForm(request.POST or None, instance=obj, initial={
-        'title': movie,
-        'user_rating': float(movie.data['rating']),
-        'your_rating': obj.your_rating,
-        'review': obj.review,
-        'date_first_watch': obj.date_first_watch,
-        'times_watched': obj.times_watched
-    }) #prefilling all these fields
+    form = AddForm(request.POST or None, instance=obj)
 
     if form.is_valid():
         form.save()
