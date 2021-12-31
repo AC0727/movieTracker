@@ -1,10 +1,10 @@
 from django import forms
 from .models import Movie, Watched
 
-class SearchForm(forms.Form):
+class search_form(forms.Form):
     search = forms.CharField(label='Add a movie')
 
-class AddForm(forms.ModelForm):
+class add_form(forms.ModelForm):
     class Meta:
         model = Watched
         fields = '__all__'
@@ -16,4 +16,6 @@ class AddForm(forms.ModelForm):
 
         self.fields['user_rating'].disabled = True
         self.fields['user_rating'].widget.attrs["readonly"] = True
+
+
 

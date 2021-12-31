@@ -1,0 +1,6 @@
+
+<form method="post">
+    {% csrf_token %}
+    <h1>Are you sure you want to delete "{{ movie.title }}"?</h1>
+    <p><input type='submit' value='Yes' />  <a href='/'>No</a></p>
+</form>

@@ -9,7 +9,7 @@
 {% if watched_list %}
     <ul>
     {% for movie in watched_list %}
-        <li>{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a></li>
+        <li>{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a>, <a href="/delete/{{ movie.id }}">delete</a></li>
     {% endfor %}
     </ul>
 {% else %}

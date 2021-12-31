@@ -1,14 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import AddForm, SearchForm
+from .forms import add_form, search_form
 from .models import Watched, Movie
 
 def home(request):
     queryset = Watched.objects.all()
     context = {
         "watched_list": queryset,
-        "search_form": SearchForm()
+        "search_form": search_form()
     }
     return render(request, 'home.html', context)
 
@@ -28,7 +28,7 @@ def page(request, movie_id):
 
 def search(request):
     if request.method == 'POST':
-        form = SearchForm(request.POST)
+        form = search_form(request.POST)
 
         if form.is_valid():
             movie = Movie()
@@ -39,14 +39,14 @@ def search(request):
             })
 
     else:
-        form = SearchForm()
+        form = search_form()
 
     return render(request, 'search.html', { 'search_form': form })
 
 
-def add(request, movie_id):
-    movie = Movie().get_media(movie_id)
-    form = AddForm(request.POST or None, initial={
+def add(request, imdb_id):
+    movie = Movie().get_media(imdb_id)
+    form = add_form(request.POST or None, initial={
         'title': movie,
         'user_rating': float(movie.data['rating'])}) #prefilled these fields
     if form.is_valid():
@@ -61,7 +61,7 @@ def add(request, movie_id):
 def edit(request, movie_id): #don't think I'll need edit.html
     obj = get_object_or_404(Watched, id=movie_id)
     movie = Movie().get_media(movie_id) #wrong movie id
-    form = AddForm(request.POST or None, instance=obj)
+    form = add_form(request.POST or None, instance=obj)
 
     if form.is_valid():
         form.save()
@@ -71,3 +71,14 @@ def edit(request, movie_id): #don't think I'll need edit.html
         'form': form,
         'movie': movie,
         'img_src': movie['full-size cover url']})
+
+
+def delete(request, movie_id):
+    obj = get_object_or_404(Watched, id=movie_id)
+    if request.method == "POST":
+        obj.delete()
+        return HttpResponseRedirect('/')
+    context = {
+        "movie": obj
+    }
+    return render(request, 'delete.html', context)
