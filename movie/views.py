@@ -59,8 +59,8 @@ def add(request, movie_id):
 
 
 def edit(request, movie_id): #don't think I'll need edit.html
-    obj = get_object_or_404(Watched, movie_id) #wrong movie id
-    movie = Movie().get_media(movie_id)
+    obj = get_object_or_404(Watched, id=movie_id)
+    movie = Movie().get_media(movie_id) #wrong movie id
     form = AddForm(request.POST or None, instance=obj)
 
     if form.is_valid():
