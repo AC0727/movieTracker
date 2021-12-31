@@ -48,18 +48,18 @@ def add(request, movie_id):
     movie = Movie().get_media(movie_id)
     form = AddForm(request.POST or None, initial={
         'title': movie,
-        'user_rating': float(movie.data['rating'])}) #make these fields uneditable
+        'user_rating': float(movie.data['rating'])}) #prefilled these fields
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/') #go back to home screen
     return render(request, 'add.html', {
          'form': form,
          'movie': movie,
          'img_src': movie['full-size cover url']})
 
 
-def edit(request, movie_id, id=id): #don't think I'll need edit.html
-    obj = get_object_or_404(Watched, id=id)
+def edit(request, movie_id): #don't think I'll need edit.html
+    obj = get_object_or_404(Watched, movie_id) #wrong movie id
     movie = Movie().get_media(movie_id)
     form = AddForm(request.POST or None, instance=obj, initial={
         'title': movie,
@@ -68,10 +68,12 @@ def edit(request, movie_id, id=id): #don't think I'll need edit.html
         'review': obj.review,
         'date_first_watch': obj.date_first_watch,
         'times_watched': obj.times_watched
-    })
+    }) #prefilling all these fields
+
     if form.is_valid():
         form.save()
         return HttpResponseRedirect('/')
+
     return render(request, 'add.html', {
         'form': form,
         'movie': movie,
