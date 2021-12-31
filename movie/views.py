@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import AddForm, EditForm, SearchForm
+from .forms import AddForm, SearchForm
 from .models import Watched, Movie
 
 def home(request):
@@ -58,19 +58,21 @@ def add(request, movie_id):
          'img_src': movie['full-size cover url']})
 
 
-def edit(request, movie_id):
-    if request.method == 'POST':
-        form = EditForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-
-    else:
-        movie = Watched().get_media(movie_id)
-        form = EditForm()
-
-        return render(request, 'edit.html', {
-            'form': form,
-            'movie': movie,
-            'img_src': movie['full-size cover url']})
-
+def edit(request, movie_id, id=id): #don't think I'll need edit.html
+    obj = get_object_or_404(Watched, id=id)
+    movie = Movie().get_media(movie_id)
+    form = AddForm(request.POST or None, instance=obj, initial={
+        'title': movie,
+        'user_rating': float(movie.data['rating']),
+        'your_rating': obj.your_rating,
+        'review': obj.review,
+        'date_first_watch': obj.date_first_watch,
+        'times_watched': obj.times_watched
+    })
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/')
+    return render(request, 'add.html', {
+        'form': form,
+        'movie': movie,
+        'img_src': movie['full-size cover url']})
