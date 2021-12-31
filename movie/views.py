@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+
 from .forms import AddForm, EditForm, SearchForm
 from .models import Watched, Movie
 
@@ -70,6 +71,7 @@ def add(request, movie_id):
         'user_rating': float(movie.data['rating'])})
     if form.is_valid():
         form.save()
+        return HttpResponseRedirect('/')
     return render(request, 'add.html', {
          'form': form,
          'movie': movie,
@@ -81,7 +83,7 @@ def edit(request, movie_id):
         form = EditForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('')
+            return HttpResponseRedirect('/')
 
     else:
         movie = Watched().get_media(movie_id)
