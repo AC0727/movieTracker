@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            body {
+                background-color: #27272B;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: white;
+            }
+            #main {
+                width: 700px;
+                margin: auto;
+            }
+            #header {
+                margin-bottom: 20px;
+            }
+            #web_name {
+                color: white;
+                text-decoration: none;
+            }
+            .split_two {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 20px;
+            }
+            a {
+                color: rgb(209, 209, 209);
+            }
+            a:active {
+                color: rgb(141, 141, 141);
+            }
+        </style>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <div id="main">
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,13 +1,33 @@
-<form action="/search/" method="post">
-    {% csrf_token %}
-    {{ search_form }}
-    <input type="submit" value="Submit">
-</form>
+{% extends "main.html" %}
 
+{% block head %}
+    <title> Search Results </title>
+    <style>
+        .search_movie {
+            display: block;
+            background-color: #3c3c3f;
+            margin-bottom: 5px;
+            padding: 35px;
+        }
+        .search_movie:hover {
+            background-color: #5d5d61;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <a href="/"><h1 id="web_name">movieTracker</h1></a>
+    <form action="/search/" method="post">
+        {% csrf_token %}
+        {{ search_form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
 <div id="search-results">
     {% if results %}
         {% for movie in results.items %}
-            <a href="/add/{{ movie.0 }}">
+            <a href="/page/{{ movie.0 }}" class="search_movie">
                 <img src="{{movie.1.cover}}" width="50px"/> {{ movie.1.title }} ({{ movie.1.year }})
             </a>
         {% endfor %}
@@ -15,3 +35,4 @@
         <h2>Add a movie!</h2>
     {% endif %}
 </div>
+{% endblock %}

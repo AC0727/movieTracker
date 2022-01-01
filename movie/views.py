@@ -23,6 +23,7 @@ def page(request, movie_id):
         'movie': movie,
         'cast': cast,
         'img_src': movie['full-size cover url'],
+        'search_form': search_form(),
     })
 
 
@@ -55,7 +56,9 @@ def add(request, imdb_id):
     return render(request, 'add.html', {
          'form': form,
          'movie': movie,
-         'img_src': movie['full-size cover url']})
+         'img_src': movie['full-size cover url'],
+         'search_form': search_form(),
+         })
 
 
 def edit(request, movie_id): #don't think I'll need edit.html
@@ -70,7 +73,9 @@ def edit(request, movie_id): #don't think I'll need edit.html
     return render(request, 'add.html', {
         'form': form,
         'movie': movie,
-        'img_src': movie['full-size cover url']})
+        'img_src': movie['full-size cover url'],
+        'search_form': search_form(),
+        })
 
 
 def delete(request, movie_id):

@@ -1,17 +1,42 @@
+{% extends "main.html" %}
 
-<form action="/search/" method="post">
-    {% csrf_token %}
-    {{ search_form }}
-    <input type="submit" value="Submit">
-</form>
+{% block head %}
+<title>Home</title>
+<style>
+    .movie_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px
+    }
+    .small_movie {
+        display: block;
+        padding: 10px;
+        background-color: #3c3c3f;
+    }
+    .small_movie img{
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <a href="/"><h1 id="web_name">movieTracker</h1></a>
+    <form action="/search/" method="post">
+        {% csrf_token %}
+        {{ search_form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
 
 <h2>Watched List</h2>
 {% if watched_list %}
-    <ul>
+    <div class="movie_container">
     {% for movie in watched_list %}
-        <li>{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a>, <a href="/delete/{{ movie.id }}">delete</a></li>
+        <div class="small_movie">{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a>, <a href="/delete/{{ movie.id }}">delete</a></div>
     {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <h1>Watch a movie!</h1>
 {% endif %}
+{% endblock %}

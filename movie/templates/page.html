@@ -1,11 +1,48 @@
-<img src="{{ img_src }}" width="200px">
-<h2>{{ movie.title }}, {{ movie.year }}</h2>
-<p>
-{% for people in movie.director %}
-    {{ people }}, 
-{% endfor %}    
-<br> <br>
-{% for people in movie.cast %}
-    {{ people.name }}, 
-{% endfor %}
-</p>
+{% extends "main.html" %}
+
+{% block head %}
+    <title>{{ movie.title }}</title>
+    <style>
+        #add {
+            display: block;
+            padding: 15px;
+            color: black;
+            text-decoration: none;
+            background-color: whitesmoke;
+        }
+        #add:hover {
+            background-color: rgb(221, 221, 221);
+        }
+        #add:active {
+            background-color: rgb(180, 180, 180);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <a href="/"><h1 id="web_name">movieTracker</h1></a>
+    <form action="/search/" method="post">
+        {% csrf_token %}
+        {{ search_form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<div class="split_two">
+    <img src="{{ img_src }}" width="100%">
+    <div>
+        <h2>{{ movie.title }}, {{ movie.year }}</h2>
+        <p> Director: 
+        {% for people in movie.director %}
+            {{ people }}, 
+        {% endfor %}    
+        <br> <br>
+        Cast: 
+        {% for people in movie.cast %}
+            {{ people.name }}, 
+        {% endfor %}
+        </p>
+        <a href="/add/{{ movie.movieID }}/" id="add">Add to your Watched</a>
+    </div>
+</div>
+{% endblock %}

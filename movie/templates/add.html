@@ -1,8 +1,24 @@
-<img src="{{ img_src }}" width="200px">
-{{ movie }}, {{ movie.year }}
+{% extends "main.html" %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+{% block head %}
+    <title>Add {{ movie.title }}</title>
+{% endblock %}
+
+{% block body %}
+<div id="header">
+    <a href="/"><h1 id="web_name">movieTracker</h1></a>
+    <form action="/search/" method="post">
+        {% csrf_token %}
+        {{ search_form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<div class="split_two">
+    <div class="child"><img src="{{ img_src }}" width="100%"></div>
+    <div class="child"><form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form></div>
+</div>
+{% endblock %}
