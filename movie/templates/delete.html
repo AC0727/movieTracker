@@ -1,13 +1,18 @@
-{% extends "main.html" %}
+{% extends "theme.html" %}
 
-{% block head %}
+{% block thead %}
     <title>Delete Confirmation</title>
+    <style>
+        #delete_message {
+            margin: auto;
+        }
+    </style>
 {% endblock %}
 
-{% block body %}
-<form method="post">
+{% block tbody %}
+<form method="post" id="delete_message">
     {% csrf_token %}
     <h1>Are you sure you want to delete "{{ movie.title }}"?</h1>
-    <p><input type='submit' value='Yes' />  <a href='/'>No</a></p>
+    <p><input type='submit' value='Yes' />  <a href='/' class="button">No</a></p>
 </form>
 {% endblock %}

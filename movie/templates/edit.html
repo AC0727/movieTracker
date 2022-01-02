@@ -5,14 +5,6 @@
 {% endblock %}
 
 {% block body %}
-<div id="header">
-    <a href="/"><h1 id="web_name">movieTracker</h1></a>
-    <form action="/search/" method="post">
-        {% csrf_token %}
-        {{ search_form }}
-        <input type="submit" value="Submit">
-    </form>
-</div>
 <div class="split_two">
     <div class="child"><img src="{{ img_src }}" width="100%"></div>
     <div class="child">

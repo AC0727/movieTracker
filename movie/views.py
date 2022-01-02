@@ -47,9 +47,15 @@ def search(request):
 
 def add(request, imdb_id):
     movie = Movie().get_media(imdb_id)
+
+    try:
+        rating = movie.data['rating']
+    except:
+        rating = 0
+
     form = add_form(request.POST or None, initial={
         'title': movie,
-        'user_rating': float(movie.data['rating'])}) #prefilled these fields
+        'user_rating': float(rating)}) #prefilled these fields
     if form.is_valid():
         form.save()
         return HttpResponseRedirect('/') #go back to home screen
@@ -87,3 +93,8 @@ def delete(request, movie_id):
         "movie": obj
     }
     return render(request, 'delete.html', context)
+
+
+def to_watch(request):
+    return render(request, 'to_watch.html', {'search_form': search_form(),})
+

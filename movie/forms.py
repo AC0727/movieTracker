@@ -2,7 +2,10 @@ from django import forms
 from .models import Movie, Watched
 
 class search_form(forms.Form):
-    search = forms.CharField(label='Add a movie')
+    search = forms.CharField(
+        label='Search',
+        widget=forms.TextInput(attrs={'placeholder': 'search movies, shows, etc.'})
+    )
 
 class add_form(forms.ModelForm):
     class Meta:

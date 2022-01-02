@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            body {
+                background-color: #27272B;
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: white;
+            }
+            #main {
+                width: 700px;
+                margin: auto;
+            }
+            .split_two {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 20px;
+            }
+            a {
+                color: rgb(209, 209, 209);
+            }
+            a:active {
+                color: rgb(141, 141, 141);
+            }
+            .button, input[type=submit] {
+                font-size: 14px;
+                border: none;
+                margin-top: 10px;
+                display: inline-block;
+                padding: 15px;
+                color: black;
+                text-decoration: none;
+                background-color: whitesmoke;
+            }
+            .button:hover, input[type=submit]:hover {
+                background-color: rgb(221, 221, 221);
+                cursor: pointer;
+            }
+            .button:active, input[type=submit]:active {
+                background-color: rgb(180, 180, 180);
+                cursor: pointer;
+            }
+        </style>
+        {% block thead %}{% endblock %}
+    </head>
+    <body>
+        <div id="main">
+            {% block tbody %}{% endblock %}
+        </div>
+    </body>
+</html>

@@ -16,14 +16,6 @@
 {% endblock %}
 
 {% block body %}
-<div id="header">
-    <a href="/"><h1 id="web_name">movieTracker</h1></a>
-    <form action="/search/" method="post">
-        {% csrf_token %}
-        {{ search_form }}
-        <input type="submit" value="Submit">
-    </form>
-</div>
 <div id="search-results">
     {% if results %}
         {% for movie in results.items %}
