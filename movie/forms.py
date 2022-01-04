@@ -22,10 +22,4 @@ class add_form(forms.ModelForm):
         self.fields['user_rating'].widget.attrs["readonly"] = True
 
 
-class user_add_form(add_form):
-    class Meta:
-        model = Watched
-        exclude = ['imdb_id']
-
-
 

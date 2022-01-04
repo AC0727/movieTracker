@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import add_form, search_form, user_add_form
+from .forms import add_form, search_form
 from .models import Watched, Movie
 
 def home(request):
@@ -59,7 +59,7 @@ def add(request, imdb_id):
 
     if form.is_valid():
         instance = form.save(commit=False)
-        instance.imdb_id = imdb_id
+        instance.imdb_id = imdb_id #post processing of movie before saving to database
         instance.save()
         return HttpResponseRedirect('/') #go back to home screen
 
@@ -77,7 +77,7 @@ def edit(request, movie_id): #don't think I'll need edit.html
     form = add_form(request.POST or None, instance=obj)
 
     if form.is_valid():
-        instance = form.save()
+        form.save()
         return HttpResponseRedirect('/')
 
     return render(request, 'add.html', {

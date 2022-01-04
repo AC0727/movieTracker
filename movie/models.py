@@ -6,7 +6,7 @@ from imdb import IMDb
 class Movie(models.Model):
     title = models.CharField(max_length=200, blank=False)
     user_rating = models.DecimalField(max_digits=3, decimal_places=1)
-    imdb_id = models.IntegerField(null=True, editable=False)
+    imdb_id = models.IntegerField(null=True, editable=False) #editable flase so won't show on form
 
     def __str__(self):
         return self.title
