@@ -1,10 +1,12 @@
 from django.db import models
 from imdb import IMDb
 
-# Create your models here.
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=200, blank=False)
     user_rating = models.DecimalField(max_digits=3, decimal_places=1)
+    imdb_id = models.IntegerField(null=True, editable=False)
 
     def __str__(self):
         return self.title

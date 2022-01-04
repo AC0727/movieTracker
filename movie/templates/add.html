@@ -1,16 +1,16 @@
 {% extends "main.html" %}
 
 {% block head %}
-    <title>Add {{ movie.title }}</title>
+    <title>Add {{ movie.title }} </title>
 {% endblock %}
 
 {% block body %}
-<div class="split_two">
-    <div class="child"><img src="{{ img_src }}" width="100%"></div>
-    <div class="child"><form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form></div>
-</div>
+    <div class="split_two">
+        <div class="child"><img src="{{ img_src }}" width="100%"></div>
+        <div class="child"><form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form></div>
+    </div>
 {% endblock %}

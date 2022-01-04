@@ -7,6 +7,7 @@ class search_form(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'search movies, shows, etc.'})
     )
 
+
 class add_form(forms.ModelForm):
     class Meta:
         model = Watched
@@ -19,6 +20,12 @@ class add_form(forms.ModelForm):
 
         self.fields['user_rating'].disabled = True
         self.fields['user_rating'].widget.attrs["readonly"] = True
+
+
+class user_add_form(add_form):
+    class Meta:
+        model = Watched
+        exclude = ['imdb_id']
 
 
 
