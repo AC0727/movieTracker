@@ -28,7 +28,6 @@
         <div class="small_movie">{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a>, <a href="/delete/{{ movie.id }}">delete</a></div>
     {% endfor %}
     </div>
-    <a href="/to_watch/" class="button">Go to To Watch list</a>
 
 {% elif to_watch_list %}
     <h2>To Watch List</h2>
@@ -41,4 +40,5 @@
 {% else %}
     <h1>Watch a movie!</h1>
 {% endif %}
+    <a href="/to_watch/" class="button">Go to To Watch list</a>
 {% endblock %}
