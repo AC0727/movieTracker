@@ -11,6 +11,7 @@
     .small_movie {
         display: block;
         padding: 10px;
+        width: 200px; /*change to be more dynamic later*/
         background-color: #3c3c3f;
     }
     .small_movie img{
@@ -25,7 +26,7 @@
     <h2>Watched List</h2>
     <div class="movie_container">
     {% for movie in watched_list %}
-        <div class="small_movie">{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a>, <a href="/delete/{{ movie.id }}">delete</a></div>
+        <div class="small_movie">{{ movie.title }}: <a href="/edit/{{ movie.id }}"> edit </a>&nbsp;<a href="/delete/{{ movie.id }}">delete</a></div>
     {% endfor %}
     </div>
 
@@ -33,7 +34,7 @@
     <h2>To Watch List</h2>
     <div class="movie_container">
     {% for movie in to_watch_list %}
-        <div class="small_movie">{{ movie.title }}, <a href="/edit/{{ movie.id }}"> edit </a>, <a href="/delete/{{ movie.id }}">delete</a></div>
+        <div class="small_movie">{{ movie.title }}: <a href="/edit/{{ movie.id }}"> edit </a>&nbsp;<a href="/delete/{{ movie.id }}">delete</a></div>
     {% endfor %}
     </div>
 
