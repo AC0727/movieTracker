@@ -71,6 +71,20 @@ def add(request, imdb_id):
          })
 
 
+def add_to_watch(request, imdb_id):
+    movie_name = Movie().get_media(imdb_id)
+
+    try:
+        rating = movie_name.data['rating']
+    except:
+        rating = 0
+
+    movie = Movie(title=movie_name, user_rating=rating, imdb_id=imdb_id)
+    movie.save()
+
+    return render(request, 'to_watch.html', {'search_form': search_form()})
+
+
 def edit(request, movie_id): #don't think I'll need edit.html
     obj = get_object_or_404(Watched, id=movie_id)
     movie = Movie().get_media(obj.imdb_id) #wrong movie id
@@ -100,5 +114,5 @@ def delete(request, movie_id):
 
 
 def to_watch(request):
-    return render(request, 'to_watch.html', {'search_form': search_form(),})
+    return render(request, 'to_watch.html', {'search_form': search_form()})
 
