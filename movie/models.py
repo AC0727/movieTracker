@@ -7,14 +7,10 @@ class Movie(models.Model):
     title = models.CharField(max_length=200, blank=False)
     user_rating = models.DecimalField(max_digits=3, decimal_places=1)
     imdb_id = models.IntegerField(null=True, editable=False) #editable false so won't show on form
+    times_watched = models.IntegerField(blank=False, default=0)
 
     def __str__(self):
         return self.title
-
-    #@classmethod
-    #def create(cls, title, user_rating, imdb_id):
-        #movie = cls(title=title, user_rating=user_rating, imdb_id=imdb_id)
-        #return movie
 
 
     def search(self, keyword):
@@ -43,16 +39,9 @@ class Watched(Movie):
     your_rating = models.DecimalField(max_digits=3, decimal_places=1)
     review = models.TextField(blank=True)
     date_first_watch = models.DateField()
-    times_watched = models.IntegerField(blank=False)
 
     def __str__(self):
         return self.title
-
-    #@classmethod
-    #def create(cls, title, user_rating, imdb_id, your_rating, review, date, times_watched):
-        #movie = cls(title=title, user_rating=user_rating, imdb_id=imdb_id, your_rating=your_rating,
-                    #review=review, date_first_watch=date, times_watched=times_watched)
-        #return movie
 
 
 class Genre(models.Model):
