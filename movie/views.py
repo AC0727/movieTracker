@@ -99,7 +99,7 @@ def edit(request, movie_id): #don't think I'll need edit.html
 
 
 def delete(request, movie_id):
-    obj = get_object_or_404(Watched, id=movie_id)
+    obj = get_object_or_404(Movie, id=movie_id)
     if request.method == "POST":
         obj.delete()
         return HttpResponseRedirect('/')

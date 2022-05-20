@@ -26,7 +26,7 @@
     <h2>Watched List</h2>
     <div class="movie_container">
     {% for movie in watched_list %}
-        <div class="small_movie">{{ movie.title }}: <a href="/edit/{{ movie.id }}"> edit </a>&nbsp;<a href="/delete/{{ movie.id }}">delete</a></div>
+        <div class="small_movie">{{ movie.title }}: <a href="/edit/{{ movie.id }}"> Edit </a>&nbsp;<a href="/delete/{{ movie.id }}">Delete</a></div>
     {% endfor %}
     </div>
 

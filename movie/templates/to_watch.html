@@ -1,7 +1,23 @@
 {% extends "main.html" %}
 
 {% block head %}
-    <title>To Watch</title>
+<title>To Watch</title>
+<style>
+    .movie_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px
+    }
+    .small_movie {
+        display: block;
+        padding: 10px;
+        width: 200px; /*change to be more dynamic later*/
+        background-color: #3c3c3f;
+    }
+    .small_movie img{
+        width: 100%;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
@@ -9,7 +25,7 @@
         <h2>To Watch List</h2>
         <div class="movie_container">
         {% for movie in to_watch_list %}
-            <div class="small_movie">{{ movie.title }}: <a href="/edit/{{ movie.id }}"> edit </a>&nbsp;<a href="/delete/{{ movie.id }}">delete</a></div>
+            <div class="small_movie">{{ movie.title }}: <a href="/delete/{{ movie.id }}">Delete</a></div>
         {% endfor %}
         </div>
     {% endif %}
