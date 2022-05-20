@@ -56,7 +56,7 @@
 
 {% block tbody %}
     <div id="header">
-        <a href="/" id="web_name"><h1>movieTracker</h1></a>
+        <a href="/" id="web_name"><h1>Movie Tracker</h1></a>
         <form action="/search/" method="post" id="search">
             {% csrf_token %}
             {{ search_form }}
