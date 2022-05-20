@@ -19,6 +19,15 @@ def page(request, movie_id):
         cast = movie['cast']
         del cast[20:]
 
+    if request.method == "POST":
+        try:
+            rating = movie.data['rating']
+        except:
+            rating = 0
+        movie_obj = Movie(title=movie, user_rating=rating, imdb_id=movie_id)
+        movie_obj.save()
+        return render(request, 'to_watch.html', {'search_form': search_form()})
+
     return render(request, 'page.html', {
         'movie': movie,
         'cast': cast,
@@ -71,18 +80,20 @@ def add(request, imdb_id):
          })
 
 
-def add_to_watch(request, imdb_id):
-    movie_name = Movie().get_media(imdb_id)
+#def add_to_watch(request, imdb_id):
+#   movie_name = Movie().get_media(imdb_id)
+#
+#    try:
+#        rating = movie_name.data['rating']
+#    except:
+#        rating = 0
+#
+#    if request.method == "POST":
+#        movie_obj = Movie(title=movie_name, user_rating=rating, imdb_id=imdb_id)
+#        movie_obj.save()
+#
+#    return render(request, 'to_watch.html', {'search_form': search_form()})
 
-    try:
-        rating = movie_name.data['rating']
-    except:
-        rating = 0
-
-    movie = Movie(title=movie_name, user_rating=rating, imdb_id=imdb_id)
-    movie.save()
-
-    return render(request, 'to_watch.html', {'search_form': search_form()})
 
 
 def edit(request, movie_id): #don't think I'll need edit.html
